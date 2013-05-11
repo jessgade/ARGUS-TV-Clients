@@ -751,6 +751,144 @@ namespace ArgusTV.UI.MediaPortal
                         }
                     }
                     break;
+                case Action.ActionType.REMOTE_1:
+                    {
+                        if (g_Player.Paused)
+                        {
+                            g_Player.Pause();
+                            _isPauseOsdVisible = false;
+                            GUIWindowManager.IsPauseOsdVisible = false;
+                            ScreenStateChanged();
+                            UpdateGUI();
+                        }
+                        if (g_Player.IsTVRecording)
+                        {
+                            _statusVisible = true;
+                            _statusTimeOutTimer = DateTime.Now;
+                            GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_LABEL_SET, GetID, 0,
+                                                              (int)Control.LABEL_ROW1, 0, 0, null);
+                            msg.Label = "";
+                            OnMessage(msg);
+                            g_Player.SeekRelative(-30);
+                            return;
+                        }
+                    }
+                    break;
+                case Action.ActionType.REMOTE_3:
+                    {
+                        if (g_Player.Paused)
+                        {
+                            g_Player.Pause();
+                            _isPauseOsdVisible = false;
+                            GUIWindowManager.IsPauseOsdVisible = false;
+                            ScreenStateChanged();
+                            UpdateGUI();
+                        }
+                        if (g_Player.IsTVRecording)
+                        {
+                            _statusVisible = true;
+                            _statusTimeOutTimer = DateTime.Now;
+                            GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_LABEL_SET, GetID, 0,
+                                                              (int)Control.LABEL_ROW1, 0, 0, null);
+                            msg.Label = "";
+                            OnMessage(msg);
+                            g_Player.SeekRelative(+30);
+                            return;
+                        }
+                    }
+                    break;
+                case Action.ActionType.REMOTE_4:
+                    {
+                        if (g_Player.Paused)
+                        {
+                            g_Player.Pause();
+                            _isPauseOsdVisible = false;
+                            GUIWindowManager.IsPauseOsdVisible = false;
+                            ScreenStateChanged();
+                            UpdateGUI();
+                        }
+                        if (g_Player.IsTVRecording)
+                        {
+                            _statusVisible = true;
+                            _statusTimeOutTimer = DateTime.Now;
+                            GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_LABEL_SET, GetID, 0,
+                                                              (int)Control.LABEL_ROW1, 0, 0, null);
+                            msg.Label = "";
+                            OnMessage(msg);
+                            g_Player.SeekRelative(-90);
+                            return;
+                        }
+                    }
+                    break;
+                case Action.ActionType.REMOTE_6:
+                    {
+                        if (g_Player.Paused)
+                        {
+                            g_Player.Pause();
+                            _isPauseOsdVisible = false;
+                            GUIWindowManager.IsPauseOsdVisible = false;
+                            ScreenStateChanged();
+                            UpdateGUI();
+                        }
+                        if (g_Player.IsTVRecording)
+                        {
+                            _statusVisible = true;
+                            _statusTimeOutTimer = DateTime.Now;
+                            GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_LABEL_SET, GetID, 0,
+                                                              (int)Control.LABEL_ROW1, 0, 0, null);
+                            msg.Label = "";
+                            OnMessage(msg);
+                            g_Player.SeekRelative(+90);
+                            return;
+                        }
+                    }
+                    break;
+                case Action.ActionType.REMOTE_7:
+                    {
+                        if (g_Player.Paused)
+                        {
+                            g_Player.Pause();
+                            _isPauseOsdVisible = false;
+                            GUIWindowManager.IsPauseOsdVisible = false;
+                            ScreenStateChanged();
+                            UpdateGUI();
+                        }
+                        if (g_Player.IsTVRecording)
+                        {
+                            _statusVisible = true;
+                            _statusTimeOutTimer = DateTime.Now;
+                            GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_LABEL_SET, GetID, 0,
+                                                              (int)Control.LABEL_ROW1, 0, 0, null);
+                            msg.Label = "";
+                            OnMessage(msg);
+                            g_Player.SeekRelative(-240);
+                            return;
+                        }
+                    }
+                    break;
+                case Action.ActionType.REMOTE_9:
+                    {
+                        if (g_Player.Paused)
+                        {
+                            g_Player.Pause();
+                            _isPauseOsdVisible = false;
+                            GUIWindowManager.IsPauseOsdVisible = false;
+                            ScreenStateChanged();
+                            UpdateGUI();
+                        }
+                        if (g_Player.IsTVRecording)
+                        {
+                            _statusVisible = true;
+                            _statusTimeOutTimer = DateTime.Now;
+                            GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_LABEL_SET, GetID, 0,
+                                                              (int)Control.LABEL_ROW1, 0, 0, null);
+                            msg.Label = "";
+                            OnMessage(msg);
+                            g_Player.SeekRelative(+240);
+                            return;
+                        }
+                    }
+                    break;
 
                 case Action.ActionType.ACTION_PAUSE:
                     {
@@ -2594,6 +2732,9 @@ namespace ArgusTV.UI.MediaPortal
             }
             if (chKey >= '0' && chKey <= '9') //Make sure it's only for the remote
             {
+                if (g_Player.IsTVRecording)     // Dont change channel if its a TVRecording - use skip steps instead.
+                    return;
+
                 _channelInputVisible = true;
 
                 _keyPressedTimer = DateTime.Now;
